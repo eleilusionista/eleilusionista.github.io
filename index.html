@@ -1,62 +1,33 @@
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+<!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <body style='margin : 0px; overflow: hidden;'>
+        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 
-<style>
-  .arjs-loader {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+        <a-assets>
+            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
+        </a-assets>
 
-  .arjs-loader div {
-    text-align: center;
-    font-size: 1.25em;
-    color: white;
-  }
-</style>
+        <a-marker type='barcode' value='7'>
+            <a-box position='0 0.5 0' color="yellow"></a-box>
+        </a-marker>
 
-<body style="margin : 0px; overflow: hidden;">
-  <!-- minimal loader shown until image descriptors are loaded -->
-  <div class="arjs-loader">
-    <div>cargando, please wait...</div>
-  </div>
-  <a-scene
-    vr-mode-ui="enabled: false;"
-    renderer="logarithmicDepthBuffer: true;"
-    embedded
-    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-  >
-    <!-- we use cors proxy to avoid cross-origin problems -->
+        <a-marker id="animated-marker" type='barcode' value='6'>
+            <a-entity
+                gltf-model="#animated-asset"
+                scale="2">
+            </a-entity>
+        </a-marker>
 
-    <!--
-      ⚠️⚠️⚠️
-      https://arjs-cors-proxy.herokuapp.com/ is now offline, Heroku has dismissed all his free plans from November 2022.
-      You need to host your own proxy and use it instead. The proxy is based on CORS Anywhere (see https://github.com/Rob--W/cors-anywhere).
-      ⚠️⚠️⚠️
-    -->
-
-    <a-nft
-      type="nft"
-      url="https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex-image-big.jpeg"
-      smooth="true"
-      smoothCount="10"
-      smoothTolerance=".01"
-      smoothThreshold="5"
-    >
-      <a-entity
-        gltf-model="https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        scale="5 5 5"
-        position="50 150 0"
-      >
-      </a-entity>
-    </a-nft>
-    <a-entity camera></a-entity>
-  </a-scene>
-</body>
+        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
+        <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
