@@ -10,18 +10,19 @@
   </head>
 
   <body>
-    <a-scene
-      vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    <a-scene embedded arjs>
     >
-    <a-entity
-      look-at="[gps-camera]"
-      scale="1000 1000 1000"
-      gltf-model src="archivo3d/e0a6ea93be9c3d6e36e51ae89901ef37e7cae3b11254da1062ee7dc4941e2d93.glb"
-    ></a-entity>
+      <a-marker preset="hiro">
+       <a-entity
+        look-at="[gps-camera]"
+        scale="1000 1000 1000"
+        gltf-model src="archivo3d/e0a6ea93be9c3d6e36e51ae89901ef37e7cae3b11254da1062ee7dc4941e2d93.glb"
+        ></a-entity>
+      </a-marker>
+    
       
       
-      <a-camera gps-camera rotation-reader> </a-camera>
+        
     </a-scene>
-  </body>
+</body>
 </html>
