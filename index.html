@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>eleprueba</title>
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ele.ilusionista</title>
 
-  <body>
-    <a-scene embedded arjs>
-      <a-text
-          value="ele.ilusionista"
-          position="0 1 -0.5"
-          align="center"
-          color="blue"
-        ></a-text>
-      <a-marker preset="hiro">
-        <!-- Contenido relacionado con el marcador "hiro" -->
-        <a-entity
-        
-        scale="10 10 10"
-        gltf-model src="archivo3d/e0a6ea93be9c3d6e36e51ae89901ef37e7cae3b11254da1062ee7dc4941e2d93.glb"
-        ></a-entity>
-      </a-marker> 
+    <!-- A-Frame y AR.js -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- GPS Entity Place -->
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+
+    <!-- Visor AR -->
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+    >
+
+      <!-- GPS Entity Place para simular ubicación GPS -->
+      <a-entity gps-entity-place="latitude: 37.7749; longitude: -122.4194;">
+        <!-- Cambiado a una esfera roja -->
+        <a-sphere position="0 0.5 0" material="color: red;"></a-sphere>
+      </a-entity>
+
+      <a-entity camera></a-entity>
     </a-scene>
-</body>
+
+  </body>
 </html>
+
