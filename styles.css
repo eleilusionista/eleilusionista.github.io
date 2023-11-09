@@ -1,3 +1,15 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url('https://raw.githubusercontent.com/ilusionista/eleilusionista/eleilusionista.github.io/blob/main/archivo3d/imagen.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #333; /* blanco */
+}
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
