@@ -6,14 +6,15 @@
   <body style="margin: 0px; overflow: hidden;">
     <a-scene embedded arjs>
       <!-- Utilizamos gps-new-entity-place para posicionar la esfera en una ubicación específica -->
-      <a-sphere material="color: blue" radius="10" gps-new-entity-place="latitude: -36.827958; longitude: -73.060079"></a-sphere>
+      <a-sphere material="color: blue" radius="5" gps-new-entity-place="latitude: -36.827958; longitude: -73.060079"></a-sphere>
       
       <!-- Mantenemos el marcador hiro para referencia visual -->
       <a-marker preset="hiro">
-        <a-box position="0 0 0" width="0.5" height="0.5" depth="0.5" color="green"></a-box>
+        <a-box position="0 0 0" width="0.5" height="0.5" depth="0.5" color="yellow"></a-box>
       </a-marker>
       
-      <a-entity camera></a-entity>
+      <!-- Utilizamos gps-new-camera para la cámara con soporte de ubicación -->
+      <a-entity camera gps-new-camera></a-entity>
     </a-scene>
   </body>
 </html>
