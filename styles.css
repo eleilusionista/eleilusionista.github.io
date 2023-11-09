@@ -1,0 +1,53 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.redes-sociales {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.redes-sociales a {
+  display: inline-block;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.donar {
+  text-align: center;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
