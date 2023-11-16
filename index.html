@@ -1,41 +1,23 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Tu Nombre - Ilusionista</title>
+    <meta charset="utf-8">
+    <title>Aplicación de Cámara</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <h1>Aplicación de Cámara</h1>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+    </div>
+    <button id="capture">Capturar Foto</button>
+    <canvas id="canvas"></canvas>
+    <img id="photo" src="" alt="Tu foto">
 
-  <header>
-    <h1>Tu Nombre - Ilusionista</h1>
-    <img src="tu_foto.jpg" alt="Tu Foto">
-  </header>
-
-  <section class="redes-sociales">
-    <a href="enlace_red_social" target="_blank">Facebook</a>
-    <a href="enlace_red_social" target="_blank">Twitter</a>
-    <!-- Agrega más redes sociales según sea necesario -->
-  </section>
-
-  <section class="donar">
-    <p>¡Apoya mi magia! Haz una donación:</p>
-    <button onclick="abrirVentana()">Donar</button>
-  </section>
-
-  <footer>
-    <p>&copy; 2023 Tu Nombre - Ilusionista</p>
-  </footer>
-
-  <script src="script.js"></script>
-  <div id="ventanaEmergente" class="ventana-emergente">
-  <div class="contenido-ventana">
-   
-  </div>
-</div>
+    <script src="app.js"></script>
 </body>
 </html>
+
 
 
 
