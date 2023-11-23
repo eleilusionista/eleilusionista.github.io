@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Aplicación de Cámara</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superponer Icono en Selfie</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Aplicación de Cámara</h1>
-    <div id="video-container">
-        <video id="video" autoplay></video>
+    <div class="upload-container">
+        <input type="file" id="imageUpload" accept="image/*">
     </div>
-    <button id="capture">Capturar Foto</button>
-    <canvas id="canvas"></canvas>
-    <img id="photo" src="" alt="Tu foto">
-
-    <script src="app.js"></script>
+    <div class="canvas-container">
+        <canvas id="canvas"></canvas>
+    </div>
+    <button id="btnDownload" style="display:none;">Descargar Selfie</button>
+    <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
