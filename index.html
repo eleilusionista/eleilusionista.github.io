@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>ELE, Ilusionista</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sección de Presentación Siempre Visible -->
+    <section id="about">
+        <h2> ELE Ilusionista</h2>
+        <p></p>
+    </section>
+    
+    
+
+    <!-- Contenedores Dinámicos para el Truco de Magia -->
+    <div id="dynamicContent">
+        <div id="interactionContainer"></div>
+        <div id="cardsContainer"></div>
+        
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+<div id="donatePopup" class="popup">
+    <div class="popup-content">
+        
+        <span class="close">&times;</span>
+        <p style="color: black;">Muchas gracias!!! te dejo mis datos . (tambien puede ser a C/rut):</p>
+
+        <pre id="transferData" style="color: black;"></pre>
+         <!-- Aquí se mostrarán los datos -->
+        <button id="copyButton">Copiar Datos</button>
+    </div>
+</div>
+
+</html>

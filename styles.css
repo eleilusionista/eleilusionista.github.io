@@ -1,0 +1,176 @@
+body {
+    background-image: url('assets/fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    margin: 0;
+    height: 100vh;
+    color: #f5f4f3f5;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+#about {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#dynamicContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+#interactionContainer {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    padding: 20px;
+    width: 80%;
+    height: 200px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.typewriter-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.saltar-button, .big-button, .continue-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: hsl(109, 32%, 13%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.saltar-button, .big-button {
+    position: absolute;
+    bottom: 10px;
+    width: 20%;
+}
+
+.saltar-button {
+    left: 10px;
+}
+
+.big-button, .continue-button {
+    right: 10px;
+}
+
+#cardsContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 100px;
+    z-index: 1;
+}
+
+.card {
+    width: 150px;
+    margin: 10px;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center center;
+    animation: popIn 1s ease-out forwards;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) translate(-50%, -50%);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+    }
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Estilos para la mini ventana */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 600px) {
+    #dynamicContent, #interactionContainer, .typewriter-text, .popup-content {
+        width: 90%;
+    }
+
+    #cardsContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        width: 80px;
+    }
+
+    .big-button, .continue-button, .saltar-button {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    #interactionContainer, .typewriter-text, .popup-content {
+        width: 80%;
+    }
+
+    #cardsContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
