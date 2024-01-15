@@ -23,25 +23,25 @@ function showCards(cards) {
 // Esta función crea los elementos de interacción y los devuelve
 function createInteractionElements() {
     const donarButton = document.createElement('button');
-    donarButton.className = 'saltar-button';
+    donarButton.className = 'donar-button';
     donarButton.textContent = 'donar';
     donarButton.style.display = 'block';
 
     const guardarButton = document.createElement('button');
-    guardarButton.className = 'big-button';
+    guardarButton.className = 'guardar-button';
     guardarButton.textContent = 'guardar contacto'; 
     guardarButton.style.display = 'block';
 
     const saltarButton = document.createElement('button');
     saltarButton.className = 'saltar-button';
     saltarButton.textContent = 'saltar';
-    saltarButton.style.display = 'none';
+    saltarButton.style.display = 'block';
 
 
     const continueButton = document.createElement('button');
     continueButton.className = 'continue-button';
     continueButton.textContent = 'Continuar';
-    continueButton.style.display = 'none';
+    continueButton.style.display = 'block';
     
     const typewriterText = document.createElement('div');
     typewriterText.className = 'typewriter-text';
@@ -59,12 +59,14 @@ function createInteractionElements() {
 
 // Función para simular el efecto de escritura de texto
 function typewriterEffect(element, text, speed, onComplete) {
+    
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
-            setTimeout(typeWriter, speed);
+            timetypew= setTimeout(typeWriter, speed);
+            
         } else if (onComplete) {
             onComplete();
         }
@@ -76,22 +78,25 @@ function typewriterEffect(element, text, speed, onComplete) {
 function setupPage() {
     const { donarButton, continueButton, typewriterText,guardarButton,saltarButton } = createInteractionElements();
     let trickStep = 0;
-    typewriterEffect(typewriterText, 'Si estás aquí es porque nos conocimos en algún lugar y pude, espero, hacer que pases un buen rato mezclando la realidad con la fantasia', 50, () => {
-        continueButton.style.display = 'block';
-        saltarButton.style.display = 'block';
+    
+
+    typewriterEffect(typewriterText, 'Si estás aquí es porque nos conocimos en algún lugar y pude, espero, hacer que pases un buen rato mezclando la realidad con la fantasia', 30, () => {
+        
        
     });
 
 
     saltarButton.addEventListener('click', () => {
                 typewriterText.innerHTML = '';
-                typewriterEffect(typewriterText, 'Este sitio lo cree con el fin de compartir mi contacto pero hacerlo de una manera mas entretenida. dale al botón guardar contacto para guarar mi contacto directamente en tu agenda. Si te gustó mi trabajo y quieres apoyarme para seguir sorprendiendolos puedes encontras mis datos de transferencia en el botón donar ', 50, () => {
+                clearTimeout(timetypew);
+                typewriterEffect(typewriterText, 'Este sitio lo cree con el fin de compartir mi contacto pero hacerlo de una manera mas entretenida. dale al botón guardar contacto para guarar mi contacto directamente en tu agenda. Si te gustó mi trabajo y quieres apoyarme para seguir sorprendiendolos puedes encontras mis datos de transferencia en el botón donar ', 30, () => {
                     donarButton.style.display = 'block';
                     guardarButton.style.display = 'block';
                 }   );  
     });
                 
     continueButton.addEventListener('click', () => {
+        clearTimeout(timetypew);
         switch(trickStep) {
             case 0:
                 typewriterText.innerHTML = ''
@@ -146,6 +151,7 @@ function setupPage() {
                 typewriterEffect(typewriterText, 'Este sitio lo cree con el fin de compartir mi contacto pero hacerlo de una manera mas entretenida. dale al botón guardar contacto para guarar mi contacto directamente en tu agenda. Si te gustó mi trabajo y quieres apoyarme para seguir sorprendiendolos puedes encontras mis datos de transferencia en el botón donar ', 50, () => {
                     ;
                 });
+                continueButton.style.display ='none'
                 cardsContainer.appendChild(donarButton);
                 cardsContainer.appendChild(guardarButton);
                 break;
