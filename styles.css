@@ -1,204 +1,118 @@
-
+/* General */
 body {
-    background-image: url('assets/fondo.png'); /* Ajusta la ruta de la imagen de fondo */
+    background-image: url('assets/fondo.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
     margin: 0;
-    height: 80vh;
+    min-height: 100vh;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1rem;
     color: #f5f4f3f5;
-    font-family: 'Consolas', 'Courier New', monospace; /* Estilo de fuente para CMD */
-    font-size: xx-large;
-    
-    
 }
 
+/* Sección de Presentación */
 #about {
     text-align: center;
-    margin-bottom: 20px
-    
+    margin: 20px;
 }
 
+/* Contenedor Dinámico */
 #dynamicContent {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin: 20px auto;
+    margin: 10px auto;
     width: 100%;
-    height: 100%; /* Ajusta el ancho máximo según tus necesidades */
 }
 
+/* Interacción */
 #interactionContainer {
     background-color: #000;
     color: #0f0;
-    font-family: 'Consolas', 'Courier New', monospace;
-    padding: 20px;
-    font-size: xx-large;
-    width:90%;
-    height: 25%; /* O un ancho fijo si prefieres */
-    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 1rem;
+    width: 90%;
+    max-width: 400px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: 2; /* Asegúrate de que está por encima de las cartas */
 }
 
-.typewriter-text {
-    width: 100%; /* O un ancho fijo si prefieres */
-    text-align: justify;
-    margin-bottom: 20px;
-}
-
-.saltar-button {
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-size: xx-large;
+/* Botones */
+button {
+    padding: 10px 15px;
+    font-size: 1rem;
     background-color: hsl(109, 32%, 13%);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 20%; /* Ajusta según sea necesario */
-    text-align: center; /* Asegúrate de que el botón esté centrado */
-}
-.big-button, .continue-button {
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: xx-large;
-    background-color: hsl(109, 32%, 13%);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20%; /* Ajusta según sea necesario */
-    text-align: center; /* Asegúrate de que el botón esté centrado */
-}
-.donar-button {
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 10%;
-    right: 80%;
-    font-size: xx-large;
-   background-color: hsl(111, 65%, 24%);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20%;
-   
+    margin-top: 10px;
+    width: 100%;
+    max-width: 250px;
 }
 
-.guardar-button {
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 10%;
-    right: 20%;
-    font-size: xx-large;
-   background-color: hsl(111, 66%, 22%);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20%;
-     /* Ajusta según sea necesario */
-    text-align: center; /* Asegúrate de que el botón esté centrado */
+button:hover {
+    background-color: hsl(109, 40%, 20%);
 }
 
+/* Cartas */
 #cardsContainer {
-    position: relative;
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;   
-    width: 80%; /* Ajusta al ancho que prefieras */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    margin-top: 200px;
-   margin-left: auto;
-    
-    
-    z-index: 1; /* Coloca las cartas debajo del contenedor de interacción */
+    gap: 10px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
 }
 
 .card {
-    width: 13vh; /* Ajusta según el tamaño de tus imágenes */
-    margin: 10;
-    opacity: 0; /* Inicia las cartas invisibles */
-    transform: scale(0); /* Comienza con las cartas reducidas */
-    transform-origin: center center; /* Asegúrate de que la animación escala desde el centro */
-    animation: popIn 1s ease-out forwards; /* La animación se mantendrá en su estado final */
+    width: 100%;
+    max-width: 80px;
+    animation: popIn 1s ease-out forwards;
 }
 
-@keyframes popIn {
-    0% {
-        opacity: 0;
-        transform: scale(0) translate(-50%, -50%);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translate(-50%, -50%);
-    }
-}
-.card:hover {
-    transform: translateY(-10px);
-}
-
-@media screen and (max-width: 400px) {
-    #dynamicContent, #interactionContainer, .typewriter-text {
-        width: 90%;
-    }
-
-    #cardsContainer {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card {
-        width: 80px;
-    }
-}
-/* Estilos para la mini ventana */
+/* Ventana Emergente */
 .popup {
-    display: none; /* Oculta inicialmente la ventana */
+    display: none;
     position: fixed;
     z-index: 10;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 300px; /* Ajusta según tus necesidades */
+    margin: 20% auto;
+    padding: 15px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 300px;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
 }
 
+/* Responsividad */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 0.9rem;
+    }
+    #cardsContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card {
+        max-width: 60px;
+    }
+}
