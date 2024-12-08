@@ -1,72 +1,53 @@
+// Configuración Inicial
 const cardsContainer = document.getElementById('cardsContainer');
 const interactionContainer = document.getElementById('interactionContainer');
-const firstSetOfCards = ['assets/3x/jt.png', 'assets/3x/kh.png', 'assets/3x/qs.png', 'assets/3x/jd.png', 'assets/3x/ks.png', 'assets/3x/qh.png'];
-const secondSetOfCards = ['assets/3x/jh.png', 'assets/3x/qt.png', 'assets/3x/kh.png', 'assets/3x/kt.png', 'assets/3x/qd.png'];
+const firstSetOfCards = [
+    'assets/3x/jt.png', 
+    'assets/3x/kh.png', 
+    'assets/3x/qs.png', 
+    'assets/3x/jd.png', 
+    'assets/3x/ks.png', 
+    'assets/3x/qh.png'
+];
+const secondSetOfCards = [
+    'assets/3x/jh.png', 
+    'assets/3x/qt.png', 
+    'assets/3x/kh.png', 
+    'assets/3x/kt.png', 
+    'assets/3x/qd.png'
+];
 
-// Esta función muestra las cartas en el contenedor de cartas
+// Función para mostrar cartas
 function showCards(cards) {
-    cardsContainer.innerHTML = ''; // Limpia el contenedor de cartas
+    cardsContainer.innerHTML = '';
     cards.forEach((card, index) => {
-        // Crear un temporizador para cada carta
         setTimeout(() => {
             const imgElement = document.createElement('img');
             imgElement.src = card;
             imgElement.alt = 'Card';
             imgElement.classList.add('card');
             cardsContainer.appendChild(imgElement);
-            // Añade la clase para la animación si es necesario
-            imgElement.classList.add('animate'); // Asegúrate de tener una clase CSS para la animación
-        }, index * 500); // Cambia el 500 a la duración que desees por carta
+        }, index * 500);
     });
 }
 
-// Esta función crea los elementos de interacción y los devuelve
+// Función para crear elementos de interacción
 function createInteractionElements() {
-    const donarButton = document.createElement('button');
-    donarButton.className = 'donar-button';
-    donarButton.textContent = 'donar';
-    donarButton.style.display = 'block';
-
-    const guardarButton = document.createElement('button');
-    guardarButton.className = 'guardar-button';
-    guardarButton.textContent = 'guardar contacto'; 
-    guardarButton.style.display = 'block';
-
-    const saltarButton = document.createElement('button');
-    saltarButton.className = 'saltar-button';
-    saltarButton.textContent = 'saltar';
-    saltarButton.style.display = 'block';
-
-
     const continueButton = document.createElement('button');
-    continueButton.className = 'continue-button';
     continueButton.textContent = 'Continuar';
-    continueButton.style.display = 'block';
-    
-    const typewriterText = document.createElement('div');
-    typewriterText.className = 'typewriter-text';
-    
-   
+    continueButton.className = 'continue-button';
     interactionContainer.appendChild(continueButton);
-    interactionContainer.appendChild(typewriterText);
-    cardsContainer.appendChild(donarButton);
-    cardsContainer.appendChild(guardarButton);
-    interactionContainer.appendChild(saltarButton);
-
-
-    return { donarButton, continueButton, typewriterText,guardarButton,saltarButton };
+    return { continueButton };
 }
 
-// Función para simular el efecto de escritura de texto
+// Simular efecto de escritura
 function typewriterEffect(element, text, speed, onComplete) {
-    
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
-            timetypew= setTimeout(typeWriter, speed);
-            
+            setTimeout(typeWriter, speed);
         } else if (onComplete) {
             onComplete();
         }
@@ -76,95 +57,82 @@ function typewriterEffect(element, text, speed, onComplete) {
 
 // Configuración inicial de la página
 function setupPage() {
-    const { donarButton, continueButton, typewriterText,guardarButton,saltarButton } = createInteractionElements();
+    const { continueButton } = createInteractionElements();
     let trickStep = 0;
-    
 
-    typewriterEffect(typewriterText, 'Si estás aquí es porque nos conocimos en algún lugar y pude, espero, hacer que pases un buen rato mezclando la realidad con la fantasia', 30, () => {
-        
-       
-    });
+    const typewriterText = document.createElement('div');
+    typewriterText.className = 'typewriter-text';
+    interactionContainer.appendChild(typewriterText);
 
+    typewriterEffect(
+        typewriterText,
+        'Si estás aquí es porque nos conocimos en algún lugar y espero haberte sorprendido.',
+        30,
+        () => {
+            continueButton.style.display = 'block';
+        }
+    );
 
-    saltarButton.addEventListener('click', () => {
-                typewriterText.innerHTML = '';
-                clearTimeout(timetypew);
-                typewriterEffect(typewriterText, 'Este sitio lo cree con el fin de compartir mi contacto pero hacerlo de una manera mas entretenida. dale al botón guardar contacto para guarar mi contacto directamente en tu agenda. Si te gustó mi trabajo y quieres apoyarme para seguir sorprendiendolos puedes encontras mis datos de transferencia en el botón donar ', 30, () => {
-                    donarButton.style.display = 'block';
-                    guardarButton.style.display = 'block';
-                }   );  
-    });
-                
     continueButton.addEventListener('click', () => {
-        clearTimeout(timetypew);
-        switch(trickStep) {
+        switch (trickStep) {
             case 0:
-                typewriterText.innerHTML = ''
-                cardsContainer.innerHTML = '';
-                typewriterEffect(typewriterText, 'Quiero tratar de asombrarte con este clasico de la internet. A continuación aparecerá una selección de cartas, concentrate en una ...', 50, () => {
-                continueButton.style.display = 'block'
+                typewriterText.innerHTML = '';
                 showCards(firstSetOfCards);
-                });
-            
-                continueButton.textContent = 'continuar';
+                typewriterEffect(
+                    typewriterText,
+                    'Concéntrate en una carta y haz clic en continuar.',
+                    50
+                );
                 trickStep++;
                 break;
-            case 1: 
-                
-                continueButton.style.display = 'none';
-                typewriterText.innerHTML = ''
-                typewriterEffect(typewriterText, 'ya la tienes ? nombrala mentalmente y apreta continuar,', 50, () => {
-                continueButton.style.display = 'block';
-                });
-            
+            case 1:
+                typewriterText.innerHTML = '';
+                typewriterEffect(
+                    typewriterText,
+                    'Nombra mentalmente tu carta varias veces. Haz clic en continuar.',
+                    50
+                );
                 trickStep++;
                 break;
-            case 2: 
+            case 2:
                 cardsContainer.innerHTML = '';
-                continueButton.style.display = 'none';
-                typewriterText.innerHTML = ''
-                typewriterEffect(typewriterText, 'ahora trataré de leer tu mente ,nombra mentalmente tu carta 5 veces ... ... ... ... ... ,', 50, () => {
-                continueButton.style.display = 'block';
-                });
-            
-                trickStep++;
-                break;
-                
-            case 3:
-                typewriterText.innerHTML = ''
-                continueButton.style.display = 'none';
-                typewriterEffect(typewriterText, 'creo que ya lo tengo , sacaré la carta que estás pensando... ... ...', 50, () => {
+                typewriterText.innerHTML = '';
                 showCards(secondSetOfCards);
-                continueButton.style.display = 'block';
-                });
-            
-                trickStep++
+                typewriterEffect(
+                    typewriterText,
+                    '¿Tu carta sigue aquí? Si es así, no busques el truco.',
+                    50
+                );
+                trickStep++;
                 break;
-            case 4:
+            case 3:
                 typewriterText.innerHTML = '';
-                cardsContainer.innerHTML = '';
-                typewriterEffect(typewriterText, 'Asombrado ? ... ... ... ...si lo estás no busques el truco , se siente mejor así...');
-                trickStep++
-                break;
-            case 5:
-                typewriterText.innerHTML = '';
-                typewriterEffect(typewriterText, 'Este sitio lo cree con el fin de compartir mi contacto pero hacerlo de una manera mas entretenida. dale al botón guardar contacto para guarar mi contacto directamente en tu agenda. Si te gustó mi trabajo y quieres apoyarme para seguir sorprendiendolos puedes encontras mis datos de transferencia en el botón donar ', 50, () => {
-                    ;
+                typewriterEffect(
+                    typewriterText,
+                    'Gracias por visitar este sitio. Si te gustó, considera donar.',
+                    50
+                );
+                interactionContainer.appendChild(document.createElement('br'));
+                const donateButton = document.createElement('button');
+                donateButton.textContent = 'Donar';
+                donateButton.className = 'donar-button';
+                interactionContainer.appendChild(donateButton);
+
+                donateButton.addEventListener('click', () => {
+                    const donatePopup = document.getElementById('donatePopup');
+                    donatePopup.style.display = 'block';
                 });
-                continueButton.style.display ='none'
-                cardsContainer.appendChild(donarButton);
-                cardsContainer.appendChild(guardarButton);
                 break;
-
-
         }
     });
-    // Obtener elementos del DOM
+}
+
+// Configuración de la ventana emergente
 const donatePopup = document.getElementById('donatePopup');
-const donateButton = document.getElementById('donarButton'); // Asegúrate de que este ID corresponda al botón donar
 const closeButton = document.querySelector('.close');
 const copyButton = document.getElementById('copyButton');
 const transferData = document.getElementById('transferData');
+
 // Datos de transferencia
 const datos = [
     "Luis Tapia Gatica",
@@ -173,42 +141,27 @@ const datos = [
     "Banco Ripley",
     "lotapia@ing.ucsc.cl"
 ];
-//asignar los datos de transferencia al elemento pre
 transferData.textContent = datos.join('\n');
-// Mostrar la mini ventana
 
+// Botón de copiar datos
+copyButton.addEventListener('click', () => {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(transferData.textContent)
+            .then(() => alert('Datos copiados al portapapeles!'))
+            .catch(err => console.error('Error al copiar: ', err));
+    }
+});
 
-donarButton.addEventListener('click', () => {
-    donatePopup.style.display = 'block';
-});
-guardarButton.addEventListener('click', () => {
-    window.location.href = 'assets/Mago Ele Ilusionista.vcf';;
-});
-// Cerrar la mini ventana
+// Cerrar la ventana emergente
 closeButton.addEventListener('click', () => {
     donatePopup.style.display = 'none';
 });
 
-// Función para copiar datos al portapapeles
-copyButton.addEventListener('click', () => {
-    // Copiar los datos al portapapeles
-    navigator.clipboard.writeText(transferData.textContent)
-        .then(() => {
-            alert('Datos copiados al portapapeles!');
-        })
-        .catch(err => {
-            console.error('Error al copiar: ', err);
-        });
-});
-
-// Cerrar la mini ventana al hacer clic fuera de ella
-window.onclick = function(event) {
-    if (event.target == donatePopup) {
+window.onclick = (event) => {
+    if (event.target === donatePopup) {
         donatePopup.style.display = 'none';
     }
-}
+};
 
-
-}
-
+// Inicializar la página
 window.onload = setupPage;
