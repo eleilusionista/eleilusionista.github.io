@@ -8,6 +8,7 @@ const donateButton = document.getElementById("donarButton");
 const closeButton = document.querySelector(".close");
 const copyButton = document.getElementById("copyButton");
 const transferData = document.getElementById("transferData");
+const continueButton = document.getElementById("continueButton");
 
 const thankYouMessage = document.createElement("div");
 thankYouMessage.id = "thankYouMessage";
@@ -31,7 +32,7 @@ const secondSetOfCards = [
 ];
 
 function typewriterEffect(element, text, speed) {
-  clearTimeout(timetypew); // Detener cualquier escritura previa
+  clearTimeout(timetypew);
   let i = 0;
   element.innerHTML = "";
 
@@ -59,11 +60,6 @@ function showCards(cards) {
 }
 
 function setupPage() {
-  const continueButton = document.createElement("button");
-  continueButton.textContent = "Continuar";
-  continueButton.className = "continue-button";
-  interactionContainer.appendChild(continueButton);
-
   const typewriterText = document.createElement("div");
   typewriterText.className = "typewriter-text";
   interactionContainer.appendChild(typewriterText);
@@ -79,6 +75,7 @@ function setupPage() {
 
     switch (trickStep) {
       case 0:
+        // Mostrar segunda etapa
         typewriterText.innerHTML = "";
         typewriterEffect(
           typewriterText,
@@ -88,29 +85,33 @@ function setupPage() {
         showCards(firstSetOfCards);
         break;
       case 1:
+        // Mostrar tercera etapa
         typewriterText.innerHTML = "";
+        cardsContainer.innerHTML = "";
         typewriterEffect(
           typewriterText,
           "Nombra mentalmente tu carta varias veces. Haz clic en continuar.",
           30
         );
+        showCards(secondSetOfCards);
         break;
       case 2:
+        // Cuarta etapa: ¿Tu carta sigue aquí?
         typewriterText.innerHTML = "";
         cardsContainer.innerHTML = "";
         typewriterEffect(
           typewriterText,
-          "¿Tu carta sigue aquí? Si es así, no busques el truco.",
+          "¿Tu carta sigue aquí?",
           30
         );
-        showCards(secondSetOfCards);
+        // La próxima vez que se haga clic se cambia a Fin
         break;
       case 3:
-        typewriterText.innerHTML = "";
-        typewriterEffect(typewriterText, "Fin del truco. Haz clic en 'Fin'.", 30);
+        // Cambiar el texto a Fin
         continueButton.textContent = "Fin";
         break;
       case 4:
+        // Al presionar Fin: desaparecer cartas (ya están vacías) y aparecer mensaje muchas gracias
         thankYouMessage.style.display = "block";
         thankYouMessage.style.opacity = "0";
         setTimeout(() => {
@@ -120,7 +121,6 @@ function setupPage() {
         continueButton.style.display = "none";
         break;
     }
-
     trickStep++;
   });
 }
@@ -136,7 +136,7 @@ const datos = [
 ];
 transferData.textContent = datos.join("\n");
 
-// Botón de copiar datos
+// Copiar datos
 copyButton.addEventListener("click", () => {
   if (navigator.clipboard) {
     navigator.clipboard
@@ -146,7 +146,7 @@ copyButton.addEventListener("click", () => {
   }
 });
 
-// Mostrar y cerrar la ventana emergente
+// Ventana Donar
 donateButton.addEventListener("click", () => {
   donatePopup.style.display = "block";
 });
@@ -155,12 +155,4 @@ closeButton.addEventListener("click", () => {
   donatePopup.style.display = "none";
 });
 
-// Como hemos cambiado la forma de agregar contacto, ya no necesitamos el .vcf
-// Ahora se usa el link "tel:" en el HTML directamente
-// Si prefieres conservar el .vcf, simplemente vuelve a poner el listener:
-// saveButton.addEventListener("click", () => {
-//   window.location.href = "assets/Mago Ele Ilusionista.vcf";
-// });
-
-// Inicializar la página
-window.onload = setupPage; 
+window.onload = setupPage;
