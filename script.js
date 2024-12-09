@@ -5,7 +5,6 @@ const cardsContainer = document.getElementById("cardsContainer");
 const interactionContainer = document.getElementById("interactionContainer");
 const donatePopup = document.getElementById("donatePopup");
 const donateButton = document.getElementById("donarButton");
-const saveButton = document.getElementById("guardarButton");
 const closeButton = document.querySelector(".close");
 const copyButton = document.getElementById("copyButton");
 const transferData = document.getElementById("transferData");
@@ -156,10 +155,12 @@ closeButton.addEventListener("click", () => {
   donatePopup.style.display = "none";
 });
 
-// Guardar contacto (Usar el mismo nombre y ruta que el código original)
-saveButton.addEventListener("click", () => {
-  window.location.href = "assets/Mago Ele Ilusionista.vcf";
-});
+// Como hemos cambiado la forma de agregar contacto, ya no necesitamos el .vcf
+// Ahora se usa el link "tel:" en el HTML directamente
+// Si prefieres conservar el .vcf, simplemente vuelve a poner el listener:
+// saveButton.addEventListener("click", () => {
+//   window.location.href = "assets/Mago Ele Ilusionista.vcf";
+// });
 
 // Inicializar la página
 window.onload = setupPage;
