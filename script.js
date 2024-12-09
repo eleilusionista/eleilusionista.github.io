@@ -1,6 +1,11 @@
 // Configuración Inicial
 const cardsContainer = document.getElementById('cardsContainer');
 const interactionContainer = document.getElementById('interactionContainer');
+const donatePopup = document.getElementById('donatePopup');
+const donateButton = document.getElementById('donarButton');
+const closeButton = document.querySelector('.close');
+const copyButton = document.getElementById('copyButton');
+const transferData = document.getElementById('transferData');
 const firstSetOfCards = [
     'assets/3x/jt.png', 
     'assets/3x/kh.png', 
@@ -105,38 +110,15 @@ function setupPage() {
                 );
                 trickStep++;
                 break;
-            case 3:
-                typewriterText.innerHTML = '';
-                typewriterEffect(
-                    typewriterText,
-                    'Gracias por visitar este sitio. Si te gustó, considera donar.',
-                    50
-                );
-                interactionContainer.appendChild(document.createElement('br'));
-                const donateButton = document.createElement('button');
-                donateButton.textContent = 'Donar';
-                donateButton.className = 'donar-button';
-                interactionContainer.appendChild(donateButton);
-
-                donateButton.addEventListener('click', () => {
-                    const donatePopup = document.getElementById('donatePopup');
-                    donatePopup.style.display = 'block';
-                });
-                break;
         }
     });
 }
-
-// Configuración de la ventana emergente
-const donatePopup = document.getElementById('donatePopup');
-const closeButton = document.querySelector('.close');
-const copyButton = document.getElementById('copyButton');
-const transferData = document.getElementById('transferData');
 
 // Datos de transferencia
 const datos = [
     "Luis Tapia Gatica",
     "RUT: 17.396.545-1",
+    "Teléfono: +56 9 8765 4321",
     "Cuenta Vista Nº 4040382471",
     "Banco Ripley",
     "lotapia@ing.ucsc.cl"
@@ -152,7 +134,11 @@ copyButton.addEventListener('click', () => {
     }
 });
 
-// Cerrar la ventana emergente
+// Mostrar y cerrar la ventana emergente
+donateButton.addEventListener('click', () => {
+    donatePopup.style.display = 'block';
+});
+
 closeButton.addEventListener('click', () => {
     donatePopup.style.display = 'none';
 });
