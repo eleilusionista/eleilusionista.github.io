@@ -163,4 +163,4 @@ closeButton.addEventListener("click", () => {
 // });
 
 // Inicializar la página
-window.onload = setupPage;
+window.onload = setupPage; 
