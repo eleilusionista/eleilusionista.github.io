@@ -43,21 +43,22 @@ body {
     align-items: center;
 }
 
-/* Botones */
-button {
-    padding: 10px 15px;
+/* Botón de Donar */
+.donar-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
     font-size: 1rem;
     background-color: hsl(109, 32%, 13%);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-    max-width: 250px;
+    z-index: 1000;
 }
 
-button:hover {
+.donar-button:hover {
     background-color: hsl(109, 40%, 20%);
 }
 
