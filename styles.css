@@ -79,8 +79,20 @@ body {
 
 .card {
     width: 100%;
-    max-width: 100px; /* Aumenta el tamaño de las cartas */
+    max-width: 120px; /* Cartas más grandes */
     animation: popIn 1s ease-out forwards;
+}
+
+/* Animación */
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Ventana Emergente */
@@ -110,6 +122,20 @@ body {
     cursor: pointer;
 }
 
+#thankYouMessage {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 /* Responsividad */
 @media screen and (max-width: 768px) {
     body {
@@ -119,6 +145,6 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
     .card {
-        max-width: 80px; /* Ajuste para pantallas pequeñas */
+        max-width: 90px;
     }
 }
