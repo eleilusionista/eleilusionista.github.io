@@ -156,4 +156,4 @@ window.onclick = (event) => {
 };
 
 // Inicializar la página
-window.onload = setupPage;
+window.onload = setupPage; 
