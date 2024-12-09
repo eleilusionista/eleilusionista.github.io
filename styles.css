@@ -43,11 +43,9 @@ body {
     align-items: center;
 }
 
-/* Botón de Donar */
-.donar-button {
+/* Botones Siempre Visibles */
+.donar-button, .guardar-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
     padding: 10px 20px;
     font-size: 1rem;
     background-color: hsl(109, 32%, 13%);
@@ -58,7 +56,17 @@ body {
     z-index: 1000;
 }
 
-.donar-button:hover {
+.donar-button {
+    bottom: 20px;
+    right: 20px;
+}
+
+.guardar-button {
+    bottom: 70px;
+    right: 20px;
+}
+
+.donar-button:hover, .guardar-button:hover {
     background-color: hsl(109, 40%, 20%);
 }
 
@@ -74,7 +82,7 @@ body {
 
 .card {
     width: 100%;
-    max-width: 80px;
+    max-width: 100px; /* Aumenta el tamaño de las cartas */
     animation: popIn 1s ease-out forwards;
 }
 
@@ -114,6 +122,6 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
     .card {
-        max-width: 60px;
+        max-width: 80px; /* Ajuste para pantallas pequeñas */
     }
 }
