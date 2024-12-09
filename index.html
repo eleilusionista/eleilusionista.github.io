@@ -7,24 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Sección de Presentación -->
     <section id="about">
         <h2>ELE Ilusionista</h2>
+        <!-- Link de Instagram con ícono -->
+        <a href="https://instagram.com/ele.ilusionista" target="_blank" class="instagram-link">
+            <img src="assets/instagram.png" alt="Instagram" class="instagram-icon">
+            @ele.ilusionista
+        </a>
     </section>
     
-    <!-- Contenedores Dinámicos -->
     <div id="dynamicContent">
         <div id="interactionContainer"></div>
         <div id="cardsContainer"></div>
     </div>
 
-    <!-- Botones Siempre Visibles -->
+    <!-- Botón Continuar/Fin fuera del contenedor, abajo a la derecha -->
+    <button id="continueButton" class="continue-button">Continuar</button>
+
     <div id="fixedButtons">
         <button id="donarButton" class="donar-button">Donar</button>
-        <button id="guardarButton" class="guardar-button">Guardar Contacto</button>
+        <a href="tel:+56987654321" id="guardarLink" class="guardar-button">Llamar Contacto</a>
     </div>
 
-    <!-- Ventana Emergente -->
     <div id="donatePopup" class="popup">
         <div class="popup-content">
             <span class="close">&times;</span>
@@ -36,4 +40,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>  
+</html>
