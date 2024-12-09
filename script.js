@@ -3,6 +3,7 @@ const cardsContainer = document.getElementById('cardsContainer');
 const interactionContainer = document.getElementById('interactionContainer');
 const donatePopup = document.getElementById('donatePopup');
 const donateButton = document.getElementById('donarButton');
+const saveButton = document.getElementById('guardarButton');
 const closeButton = document.querySelector('.close');
 const copyButton = document.getElementById('copyButton');
 const transferData = document.getElementById('transferData');
@@ -141,6 +142,11 @@ donateButton.addEventListener('click', () => {
 
 closeButton.addEventListener('click', () => {
     donatePopup.style.display = 'none';
+});
+
+// Guardar contacto
+saveButton.addEventListener('click', () => {
+    window.location.href = 'assets/Mago_Ele_Contacto.vcf';
 });
 
 window.onclick = (event) => {
