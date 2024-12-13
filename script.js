@@ -72,10 +72,8 @@ function setupPage() {
 
   continueButton.addEventListener("click", () => {
     clearTimeout(timetypew); 
-
     switch (trickStep) {
       case 0:
-        // Mostrar segunda etapa
         typewriterText.innerHTML = "";
         typewriterEffect(
           typewriterText,
@@ -85,7 +83,6 @@ function setupPage() {
         showCards(firstSetOfCards);
         break;
       case 1:
-        // Mostrar tercera etapa
         typewriterText.innerHTML = "";
         cardsContainer.innerHTML = "";
         typewriterEffect(
@@ -96,7 +93,6 @@ function setupPage() {
         showCards(secondSetOfCards);
         break;
       case 2:
-        // Cuarta etapa: ¿Tu carta sigue aquí?
         typewriterText.innerHTML = "";
         cardsContainer.innerHTML = "";
         typewriterEffect(
@@ -104,14 +100,11 @@ function setupPage() {
           "¿Tu carta sigue aquí?",
           30
         );
-        // La próxima vez que se haga clic se cambia a Fin
         break;
       case 3:
-        // Cambiar el texto a Fin
         continueButton.textContent = "Fin";
         break;
       case 4:
-        // Al presionar Fin: desaparecer cartas (ya están vacías) y aparecer mensaje muchas gracias
         thankYouMessage.style.display = "block";
         thankYouMessage.style.opacity = "0";
         setTimeout(() => {
