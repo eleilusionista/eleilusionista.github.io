@@ -16,21 +16,6 @@ body {
     margin: 20px;
 }
 
-.instagram-link {
-    display: inline-flex;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
-.instagram-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-}
-
 #dynamicContent {
     display: flex;
     flex-direction: column;
@@ -52,7 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 50px; /* Para que el botón no se superponga */
+    margin-bottom: 20px;
 }
 
 #cardsContainer {
@@ -81,11 +66,7 @@ body {
     }
 }
 
-/* Botón Continuar/Fin en la esquina inferior derecha de la pantalla */
 .continue-button {
-    position: fixed;
-    bottom: 100px; /* por encima de los otros botones */
-    right: 20px;
     padding: 10px 20px;
     font-size: 1rem;
     background-color: hsl(109, 32%, 13%);
@@ -93,6 +74,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px;
 }
 
 .continue-button:hover {
@@ -108,20 +90,10 @@ body {
     z-index: 1000;
 }
 
-.donar-button, .guardar-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: hsl(109, 32%, 13%);
-    color: white;
+.donar-button {
+    background-color: transparent;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-.donar-button:hover, .guardar-button:hover {
-    background-color: hsl(109, 40%, 20%);
 }
 
 .popup {
