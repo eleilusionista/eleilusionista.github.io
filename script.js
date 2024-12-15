@@ -176,11 +176,11 @@ function setupPage() {
 
 // Datos de transferencia
 const datos = [
-  "LUIS OSVALDO TAPIA GATICA
-RUT: 17.396.545-1
-Cuenta Vista Nº 4040382471
-Banco Ripley
-lotapia@ing.ucsc.cl",
+  "LUIS OSVALDO TAPIA GATICA"
+"RUT: 17.396.545-1"
+"Cuenta Vista Nº 4040382471"
+"Banco Ripley"
+"lotapia@ing.ucsc.cl",
 ];
 transferData.textContent = datos.join("\n");
 
