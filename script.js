@@ -92,7 +92,7 @@ function setupPage() {
   // Paso 0: Mensaje inicial
   typewriterEffect(
     typewriterText,
-    "Si estás aquí es porque nos encontramos en algún lugar de este mundo. Ahora quiero sorprenderte a través de acá.",
+    "Si estás aquí es porque nos encontramos en algún lugar de este mundo. Ahora quiero sorprenderte con este clasico.",
     30
   );
 
