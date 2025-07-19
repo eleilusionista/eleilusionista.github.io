@@ -96,7 +96,7 @@ function nextStep() {
       }, 100);
       setTimeout(() => {
         elements.donate.classList.add("highlight");
-        elements.donate.querySelector("img").style.animation = "magicGlow 2s infinite";
+        elements.donate.querySelector("img").classList.add("magic-particles");
       }, 1500);
       elements.continue.style.display = "none";
       break;
