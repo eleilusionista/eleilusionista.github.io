@@ -1,146 +1,226 @@
+// ==============================
+// VARIABLES Y ELEMENTOS
+// ==============================
+let timetypew;
 let trickStep = 0;
-let typewriterTimeout;
 
-const cards1 = ["assets/3x/jt.png", "assets/3x/kh.png", "assets/3x/qs.png", "assets/3x/jd.png", "assets/3x/ks.png", "assets/3x/qh.png"];
-const cards2 = ["assets/3x/js.png", "assets/3x/kd.png", "assets/3x/qt.png", "assets/3x/jh.png", "assets/3x/qd.png"];
+const cardsContainer = document.getElementById("cardsContainer");
+const interactionContainer = document.getElementById("interactionContainer");
+const donatePopup = document.getElementById("donatePopup");
+const donateButton = document.getElementById("donarButton");
+const closeButton = document.querySelector(".close");
+const copyButton = document.getElementById("copyButton");
+const transferData = document.getElementById("transferData");
+const continueButton = document.getElementById("continueButton");
 
-const elements = {
-  cards: document.getElementById("cardsContainer"),
-  interaction: document.getElementById("interactionContainer"),
-  popup: document.getElementById("donatePopup"),
-  continue: document.getElementById("continueButton"),
-  donate: document.getElementById("donarButton"),
-  close: document.querySelector(".close"),
-  copy: document.getElementById("copyButton"),
-  transfer: document.getElementById("transferData"),
-  thankYou: document.getElementById("thankYouMessage")
-};
+const thankYouMessage = document.createElement("div");
+thankYouMessage.id = "thankYouMessage";
+thankYouMessage.innerHTML = "¡Muchas gracias!";
+document.body.appendChild(thankYouMessage);
 
-const mensajes = [
-  "Si estás aquí es porque nos encontramos en algún lugar de este mundo. Ahora quiero sorprenderte con este clásico.",
-  "Piensa en una de estas cartas, y nómbrala mentalmente...",
-  "Nombra nuevamente esa carta en tu mente 3 veces. Luego aprieta continuar.",
-  "Creo que ya sé cuál pensaste, la sacaré del set.",
-  "¿Sorprendido? ... para eso estoy acá. Si te gusta mi trabajo y quieres apoyarme, más abajo encontrarás mis datos de transferencia, así como también mi Instagram y mi WhatsApp.",
-  "¡Muchas gracias!"
+// Primer y segundo set de cartas
+const firstSetOfCards = [
+  "assets/3x/jt.png",
+  "assets/3x/kh.png",
+  "assets/3x/qs.png",
+  "assets/3x/jd.png",
+  "assets/3x/ks.png",
+  "assets/3x/qh.png",
 ];
 
-function typewriter(element, text, speed = 30, callback) {
-  clearTimeout(typewriterTimeout);
+const secondSetOfCards = [
+  "assets/3x/js.png",
+  "assets/3x/kd.png",
+  "assets/3x/qt.png",
+  "assets/3x/jh.png",
+  "assets/3x/qd.png",
+];
+
+// ==============================
+// EFECTO MÁQUINA DE ESCRIBIR
+// ==============================
+function typewriterEffect(element, text, speed, callback) {
+  clearTimeout(timetypew);
   let i = 0;
-  element.textContent = "";
-  function write() {
+  element.innerHTML = "";
+
+  function typeWriter() {
     if (i < text.length) {
-      element.textContent += text[i++];
-      typewriterTimeout = setTimeout(write, speed);
-    } else if (callback) callback();
+      element.innerHTML += text.charAt(i);
+      i++;
+      timetypew = setTimeout(typeWriter, speed);
+    } else {
+      if (callback) callback();
+    }
   }
-  write();
+  typeWriter();
 }
 
-function renderCards(cards) {
-  elements.cards.innerHTML = "";
-  cards.forEach((src, index) => {
+// ==============================
+// MOSTRAR CARTAS EN PANTALLA
+// ==============================
+function showCards(cards) {
+  cardsContainer.innerHTML = "";
+  cards.forEach((card, index) => {
     setTimeout(() => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "Carta";
-      img.classList.add("card");
-      elements.cards.appendChild(img);
+      const imgElement = document.createElement("img");
+      imgElement.src = card;
+      imgElement.alt = "Card";
+      imgElement.classList.add("card");
+      cardsContainer.appendChild(imgElement);
     }, index * 300);
   });
 }
 
-function animateVanish(callback) {
-  const cards = elements.cards.querySelectorAll(".card");
-  cards.forEach((card) => {
-    card.classList.add("tornado");
-    card.addEventListener("animationend", () => card.remove(), { once: true });
-  });
-  if (callback) setTimeout(callback, cards.length * 100 + 1000);
+// ==============================
+// RESALTAR Y DESRESALTAR BOTÓN
+// ==============================
+function removeHighlight(button) {
+  button.classList.remove("highlight");
+}
+function addHighlight(button) {
+  button.classList.add("highlight");
 }
 
-function nextStep() {
-  const textEl = elements.interaction.querySelector(".typewriter-text");
-  if (!textEl) return;
-
-  elements.continue.classList.remove("highlight");
-  elements.cards.innerHTML = "";
-
-  switch (trickStep) {
-    case 0:
-      typewriter(textEl, mensajes[0], 30, () => elements.continue.classList.add("highlight"));
-      break;
-    case 1:
-      typewriter(textEl, mensajes[1], 30, () => elements.continue.classList.add("highlight"));
-      renderCards(cards1);
-      break;
-    case 2:
-      typewriter(textEl, mensajes[2], 30, () => elements.continue.classList.add("highlight"));
-      break;
-    case 3:
-      typewriter(textEl, mensajes[3], 30, () => {
-        renderCards(cards2);
-        elements.continue.classList.add("highlight");
-      });
-      break;
-    case 4:
-      typewriter(textEl, mensajes[4], 30, () => elements.continue.classList.add("highlight"));
-      break;
-    case 5:
-      animateVanish();
-      typewriter(textEl, mensajes[5]);
-      elements.thankYou.style.display = "block";
-      elements.thankYou.style.opacity = "0";
+// ==============================
+// DESAPARECER CARTAS
+// ==============================
+function vanishCards() {
+  const cards = cardsContainer.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("tornado");
       setTimeout(() => {
-        elements.thankYou.style.transition = "opacity 1s";
-        elements.thankYou.style.opacity = "1";
-      }, 100);
-      setTimeout(() => {
-        elements.donate.classList.add("highlight");
-        elements.donate.querySelector("img").classList.add("pulse");
-      }, 1500);
-      elements.continue.style.display = "none";
-      break;
-  }
-
-  trickStep++;
-}
-
-function bindEvents() {
-  elements.continue.addEventListener("click", nextStep);
-
-  elements.donate.addEventListener("click", () => {
-    elements.popup.style.display = "flex";
-    elements.donate.querySelector("img").classList.remove("pulse");
-  });
-
-  elements.close.addEventListener("click", () => {
-    elements.popup.style.display = "none";
-  });
-
-  elements.copy.addEventListener("click", () => {
-    navigator.clipboard.writeText(elements.transfer.textContent)
-      .then(() => alert("Datos copiados al portapapeles!"))
-      .catch(err => console.error("Error al copiar: ", err));
+        card.remove();
+      }, 1000);
+    }, index * 100);
   });
 }
 
+// ==============================
+// CONFIGURAR PÁGINA AL CARGAR
+// ==============================
 function setupPage() {
-  const typewriterDiv = document.createElement("div");
-  typewriterDiv.className = "typewriter-text";
-  elements.interaction.appendChild(typewriterDiv);
-  nextStep();
+  const typewriterText = document.createElement("div");
+  typewriterText.className = "typewriter-text";
+  interactionContainer.appendChild(typewriterText);
 
-  elements.transfer.textContent = [
-    "LUIS OSVALDO TAPIA GATICA",
-    "RUT: 17.396.545-1",
-    "Cuenta Vista Nº 4040382471",
-    "Banco Ripley",
-    "lotapia@ing.ucsc.cl"
-  ].join("\n");
+  // Paso 0: mensaje de bienvenida
+  typewriterEffect(
+    typewriterText,
+    "Si estás aquí es porque nos encontramos en algún lugar de este mundo. Ahora quiero sorprenderte con este clásico.",
+    30
+  );
 
-  bindEvents();
+  continueButton.addEventListener("click", () => {
+    clearTimeout(timetypew);
+    removeHighlight(continueButton);
+
+    switch (trickStep) {
+      case 0:
+        typewriterText.innerHTML = "";
+        typewriterEffect(
+          typewriterText,
+          "Piensa en una de estas cartas, y nómbrala mentalmente...",
+          30,
+          () => {
+            showCards(firstSetOfCards);
+            addHighlight(continueButton);
+          }
+        );
+        break;
+
+      case 1:
+        cardsContainer.innerHTML = "";
+        typewriterText.innerHTML = "";
+        typewriterEffect(
+          typewriterText,
+          "Nombra nuevamente esa carta en tu mente 3 veces. Luego aprieta continuar.",
+          30,
+          () => addHighlight(continueButton)
+        );
+        break;
+
+      case 2:
+        typewriterText.innerHTML = "";
+        typewriterEffect(
+          typewriterText,
+          "Creo que ya sé cuál pensaste, la sacaré del set.",
+          30,
+          () => {
+            showCards(secondSetOfCards);
+            addHighlight(continueButton);
+          }
+        );
+        break;
+
+      case 3:
+        typewriterText.innerHTML = "";
+        cardsContainer.innerHTML = "";
+        typewriterEffect(
+          typewriterText,
+          "¿Sorprendido? ... para eso estoy acá. Si te gusta mi trabajo y quieres apoyarme, más abajo encontrarás mis datos de transferencia, así como también mi Instagram y mi WhatsApp.",
+          30,
+          () => addHighlight(continueButton)
+        );
+        break;
+
+      case 4:
+        vanishCards();
+        typewriterText.innerHTML = "";
+        typewriterEffect(typewriterText, "¡Muchas gracias!", 30);
+        thankYouMessage.style.display = "block";
+        thankYouMessage.style.opacity = "0";
+        setTimeout(() => {
+          thankYouMessage.style.transition = "opacity 1s";
+          thankYouMessage.style.opacity = "1";
+        }, 100);
+        setTimeout(() => {
+          donateButton.classList.add("pulse");
+        }, 1500);
+        continueButton.style.display = "none";
+        break;
+    }
+    trickStep++;
+  });
 }
 
+// ==============================
+// DATOS DE TRANSFERENCIA
+// ==============================
+const datos = [
+  "LUIS OSVALDO TAPIA GATICA",
+  "RUT: 17.396.545-1",
+  "Cuenta Vista Nº 4040382471",
+  "Banco Ripley",
+  "lotapia@ing.ucsc.cl",
+];
+transferData.textContent = datos.join("\n");
+
+// ==============================
+// COPIAR DATOS AL PORTAPAPELES
+// ==============================
+copyButton.addEventListener("click", () => {
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(transferData.textContent)
+      .then(() => alert("Datos copiados al portapapeles!"))
+      .catch((err) => console.error("Error al copiar: ", err));
+  }
+});
+
+// ==============================
+// ABRIR Y CERRAR POPUP DE DONACIÓN
+// ==============================
+donateButton.addEventListener("click", () => {
+  donatePopup.style.display = "block";
+});
+
+closeButton.addEventListener("click", () => {
+  donatePopup.style.display = "none";
+});
+
+// ==============================
+// INICIALIZACIÓN
+// ==============================
 window.onload = setupPage;
