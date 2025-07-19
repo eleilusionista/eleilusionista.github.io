@@ -19,6 +19,9 @@ body {
     margin: 20px;
 }
 
+/* ==============================
+   CONTENIDO DINÁMICO Y CARTAS
+   ============================== */
 #dynamicContent {
     display: flex;
     flex-direction: column;
@@ -116,7 +119,7 @@ body {
     height: auto;
 }
 
-/* Efecto de latido mágico */
+/* Efecto de latido + resplandor mágico */
 .pulse {
     animation: pulseGlow 1.2s infinite ease-in-out;
 }
@@ -143,20 +146,23 @@ body {
     display: none;
     position: fixed;
     z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
     background-color: #fefefe;
-    margin: 20% auto;
     padding: 15px;
     border-radius: 10px;
     width: 90%;
     max-width: 300px;
+    text-align: center;
+}
+
+/* Color para texto dentro del popup */
+.popup-content p,
+.popup-content pre {
+    color: black;
 }
 
 .close {
@@ -180,6 +186,7 @@ body {
     border-radius: 10px;
     text-align: center;
     font-size: 1.5rem;
+    transition: opacity 1s;
 }
 
 /* ==============================
