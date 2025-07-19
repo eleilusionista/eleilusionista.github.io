@@ -163,19 +163,40 @@ body {
   }
 }
 
-@keyframes magicGlow {
-  0%, 100% {
-    box-shadow: 0 0 10px 5px rgba(0, 255, 255, 0.5);
-    transform: scale(1);
+.tornado {
+  animation: tornado 1s ease-in forwards;
+}
+
+/* EFECTO MÁGICO DONAR */
+@keyframes sparkleParticles {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
-  50% {
-    box-shadow: 0 0 20px 10px rgba(255, 0, 255, 0.7);
-    transform: scale(1.05);
+  100% {
+    transform: translateY(-30px) scale(0.5);
+    opacity: 0;
   }
 }
 
-.tornado {
-  animation: tornado 1s ease-in forwards;
+.magic-particles {
+  position: relative;
+  display: inline-block;
+}
+
+.magic-particles::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sparkleParticles 1.2s infinite ease-out;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* RESPONSIVE */
@@ -187,36 +208,4 @@ body {
   .card {
     max-width: 90px;
   }
-/* Efecto de partículas mágicas */
-.magic-particles {
-  position: relative;
-  z-index: 1;
-}
-
-.magic-particles::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%),
-                    radial-gradient(circle, rgba(0,255,255,0.6) 0%, transparent 70%),
-                    radial-gradient(circle, rgba(255,0,255,0.5) 0%, transparent 70%);
-  background-size: 5px 5px, 7px 7px, 6px 6px;
-  background-repeat: repeat;
-  animation: sparkle 2s infinite linear;
-  z-index: 2;
-  border-radius: 50%;
-}
-
-@keyframes sparkle {
-  0% {
-    background-position: 0 0, 10px 10px, 20px 20px;
-  }
-  100% {
-    background-position: 30px 30px, 0px 40px, -20px -20px;
-  }
-}
 }
