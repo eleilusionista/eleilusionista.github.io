@@ -1,48 +1,21 @@
-// ==============================
-// SCRIPT PRINCIPAL - ELE ILUSIONISTA
-// ==============================
-
-// Temporizador interno para el efecto máquina de escribir
-let typewriterTimeout;
-// Paso actual de la rutina
 let trickStep = 0;
+let typewriterTimeout;
 
-// ==============================
-// CONJUNTOS DE CARTAS
-// ==============================
-const firstSetOfCards = [
-  "assets/3x/jt.png",
-  "assets/3x/kh.png",
-  "assets/3x/qs.png",
-  "assets/3x/jd.png",
-  "assets/3x/ks.png",
-  "assets/3x/qh.png",
-];
-const secondSetOfCards = [
-  "assets/3x/js.png",
-  "assets/3x/kd.png",
-  "assets/3x/qt.png",
-  "assets/3x/jh.png",
-  "assets/3x/qd.png",
-];
+const cards1 = ["assets/3x/jt.png", "assets/3x/kh.png", "assets/3x/qs.png", "assets/3x/jd.png", "assets/3x/ks.png", "assets/3x/qh.png"];
+const cards2 = ["assets/3x/js.png", "assets/3x/kd.png", "assets/3x/qt.png", "assets/3x/jh.png", "assets/3x/qd.png"];
 
-// ==============================
-// ELEMENTOS DEL DOM
-// ==============================
-const cardsContainer      = document.getElementById("cardsContainer");
-const interactionContainer = document.getElementById("interactionContainer");
-const donatePopup         = document.getElementById("donatePopup");
-const donateButton        = document.getElementById("donarButton");
-const closeButton         = document.querySelector(".close");
-const copyButton          = document.getElementById("copyButton");
-const transferData        = document.getElementById("transferData");
-const continueButton      = document.getElementById("continueButton");
-// Usamos el DIV ya existente en el HTML, no creamos uno nuevo
-const thankYouMessage     = document.getElementById("thankYouMessage");
+const elements = {
+  cards: document.getElementById("cardsContainer"),
+  interaction: document.getElementById("interactionContainer"),
+  popup: document.getElementById("donatePopup"),
+  continue: document.getElementById("continueButton"),
+  donate: document.getElementById("donarButton"),
+  close: document.querySelector(".close"),
+  copy: document.getElementById("copyButton"),
+  transfer: document.getElementById("transferData"),
+  thankYou: document.getElementById("thankYouMessage")
+};
 
-// ==============================
-// TEXTOS DE LA RUTINA
-// ==============================
 const mensajes = [
   "Si estás aquí es porque nos encontramos en algún lugar de este mundo. Ahora quiero sorprenderte con este clásico.",
   "Piensa en una de estas cartas, y nómbrala mentalmente...",
@@ -52,158 +25,114 @@ const mensajes = [
   "¡Muchas gracias!"
 ];
 
-// ==============================
-// EFECTO MÁQUINA DE ESCRIBIR
-// ==============================
-function typewriterEffect(element, text, speed = 30, callback) {
+function typewriter(element, text, speed = 30, callback) {
   clearTimeout(typewriterTimeout);
   let i = 0;
   element.textContent = "";
   function write() {
     if (i < text.length) {
-      element.textContent += text.charAt(i++);
+      element.textContent += text[i++];
       typewriterTimeout = setTimeout(write, speed);
-    } else if (callback) {
-      callback();
-    }
+    } else if (callback) callback();
   }
   write();
 }
 
-// ==============================
-// MOSTRAR UN CONJUNTO DE CARTAS
-// ==============================
-function showCards(cards) {
-  cardsContainer.innerHTML = "";
+function renderCards(cards) {
+  elements.cards.innerHTML = "";
   cards.forEach((src, index) => {
     setTimeout(() => {
       const img = document.createElement("img");
       img.src = src;
       img.alt = "Carta";
       img.classList.add("card");
-      cardsContainer.appendChild(img);
+      elements.cards.appendChild(img);
     }, index * 300);
   });
 }
 
-// ==============================
-// DESVANECER CARTAS CON TORNADO
-// ==============================
-function vanishCards() {
-  const cards = cardsContainer.querySelectorAll(".card");
-  cards.forEach((card, idx) => {
-    setTimeout(() => {
-      card.classList.add("tornado");
-      card.addEventListener("animationend", () => card.remove(), { once: true });
-    }, idx * 100);
+function animateVanish(callback) {
+  const cards = elements.cards.querySelectorAll(".card");
+  cards.forEach((card) => {
+    card.classList.add("tornado");
+    card.addEventListener("animationend", () => card.remove(), { once: true });
   });
+  if (callback) setTimeout(callback, cards.length * 100 + 1000);
 }
 
-// ==============================
-// AVANZAR AL SIGUIENTE PASO
-// ==============================
 function nextStep() {
-  const textEl = interactionContainer.querySelector(".typewriter-text");
+  const textEl = elements.interaction.querySelector(".typewriter-text");
   if (!textEl) return;
 
-  // Limpiar resaltado y cartas previas
-  continueButton.classList.remove("highlight");
-  cardsContainer.innerHTML = "";
+  elements.continue.classList.remove("highlight");
+  elements.cards.innerHTML = "";
 
   switch (trickStep) {
     case 0:
-      // Paso 1: mostrar primer set de cartas
-      typewriterEffect(textEl, mensajes[0], 30, () => {
-        showCards(firstSetOfCards);
-        continueButton.classList.add("highlight");
-      });
+      typewriter(textEl, mensajes[0], 30, () => elements.continue.classList.add("highlight"));
       break;
-
     case 1:
-      // Paso 2: repetir mentalmente
-      typewriterEffect(textEl, mensajes[1], 30, () => {
-        continueButton.classList.add("highlight");
-      });
+      typewriter(textEl, mensajes[1], 30, () => elements.continue.classList.add("highlight"));
+      renderCards(cards1);
       break;
-
     case 2:
-      // Paso 3: mostrar segundo set de cartas
-      typewriterEffect(textEl, mensajes[2], 30, () => {
-        showCards(secondSetOfCards);
-        continueButton.classList.add("highlight");
-      });
+      typewriter(textEl, mensajes[2], 30, () => elements.continue.classList.add("highlight"));
       break;
-
     case 3:
-      // Paso 4: invitación a donar
-      typewriterEffect(textEl, mensajes[3], 30, () => {
-        continueButton.classList.add("highlight");
+      typewriter(textEl, mensajes[3], 30, () => {
+        renderCards(cards2);
+        elements.continue.classList.add("highlight");
       });
       break;
-
     case 4:
-      // Paso 5: final predicción y agradecimiento
-      vanishCards();
-      typewriterEffect(textEl, mensajes[4], 30);
-      // Mostrar mensaje de agradecimiento
-      thankYouMessage.style.display = "block";
-      thankYouMessage.style.opacity = "0";
+      typewriter(textEl, mensajes[4], 30, () => elements.continue.classList.add("highlight"));
+      break;
+    case 5:
+      animateVanish();
+      typewriter(textEl, mensajes[5]);
+      elements.thankYou.style.display = "block";
+      elements.thankYou.style.opacity = "0";
       setTimeout(() => {
-        thankYouMessage.style.transition = "opacity 1s";
-        thankYouMessage.style.opacity = "1";
+        elements.thankYou.style.transition = "opacity 1s";
+        elements.thankYou.style.opacity = "1";
       }, 100);
-      // Iniciar efecto de latido sobre la imagen de donar
       setTimeout(() => {
-        donateButton.querySelector("img").classList.add("pulse");
+        elements.donate.classList.add("highlight");
+        elements.donate.querySelector("img").classList.add("pulse");
       }, 1500);
-      continueButton.style.display = "none";
+      elements.continue.style.display = "none";
       break;
   }
 
   trickStep++;
 }
 
-// ==============================
-// ASOCIAR EVENTOS AL DOM
-// ==============================
 function bindEvents() {
-  // Avanzar pasos
-  continueButton.addEventListener("click", () => {
-    // Si el texto sigue escribiéndose, lo completamos de golpe
-    clearTimeout(typewriterTimeout);
-    nextStep();
+  elements.continue.addEventListener("click", nextStep);
+
+  elements.donate.addEventListener("click", () => {
+    elements.popup.style.display = "flex";
+    elements.donate.querySelector("img").classList.remove("pulse");
   });
 
-  // Abrir popup y detener latido
-  donateButton.addEventListener("click", () => {
-    donatePopup.style.display = "flex";
-    donateButton.querySelector("img").classList.remove("pulse");
+  elements.close.addEventListener("click", () => {
+    elements.popup.style.display = "none";
   });
 
-  // Cerrar popup
-  closeButton.addEventListener("click", () => {
-    donatePopup.style.display = "none";
-  });
-
-  // Copiar datos
-  copyButton.addEventListener("click", () => {
-    navigator.clipboard.writeText(transferData.textContent)
+  elements.copy.addEventListener("click", () => {
+    navigator.clipboard.writeText(elements.transfer.textContent)
       .then(() => alert("Datos copiados al portapapeles!"))
-      .catch(err => console.error("Error al copiar:", err));
+      .catch(err => console.error("Error al copiar: ", err));
   });
 }
 
-// ==============================
-// CONFIGURACIÓN INICIAL
-// ==============================
 function setupPage() {
-  // Insertar elemento para máquina de escribir
   const typewriterDiv = document.createElement("div");
   typewriterDiv.className = "typewriter-text";
-  interactionContainer.appendChild(typewriterDiv);
+  elements.interaction.appendChild(typewriterDiv);
+  nextStep();
 
-  // Carga datos de transferencia
-  transferData.textContent = [
+  elements.transfer.textContent = [
     "LUIS OSVALDO TAPIA GATICA",
     "RUT: 17.396.545-1",
     "Cuenta Vista Nº 4040382471",
@@ -211,15 +140,7 @@ function setupPage() {
     "lotapia@ing.ucsc.cl"
   ].join("\n");
 
-  // Asociar eventos y arrancar
   bindEvents();
-  // Mostrar primer mensaje sin requerir click
-  typewriterEffect(typewriterDiv, mensajes[0], 30, () => {
-    showCards(firstSetOfCards);
-    continueButton.classList.add("highlight");
-    trickStep = 1; // ya avanzamos el primer paso
-  });
 }
 
-// Ejecutar al cargar la página
 window.onload = setupPage;
