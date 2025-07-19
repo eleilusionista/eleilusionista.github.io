@@ -26,10 +26,10 @@ const firstSetOfCards = [
 ];
 
 const secondSetOfCards = [
-  "assets/3x/jh.png",
+  "assets/3x/js.png",
+  "assets/3x/kd.png",
   "assets/3x/qt.png",
-  "assets/3x/kh.png",
-  "assets/3x/kt.png",
+  "assets/3x/jh.png",
   "assets/3x/qd.png",
 ];
 
