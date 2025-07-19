@@ -94,7 +94,10 @@ function nextStep() {
         elements.thankYou.style.transition = "opacity 1s";
         elements.thankYou.style.opacity = "1";
       }, 100);
-      setTimeout(() => elements.donate.classList.add("highlight"), 1500);
+     setTimeout(() => {
+  elements.donate.classList.add("highlight");
+  elements.donate.querySelector("img").style.animation = "magicGlow 2s infinite";
+}, 1500);
       elements.continue.style.display = "none";
       break;
   }
