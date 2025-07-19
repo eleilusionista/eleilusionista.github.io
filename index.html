@@ -2,20 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ELE, Ilusionista</title>
+  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <section id="about"><h2>ELE Ilusionista</h2></section>
+  <!-- Sección de presentación del ilusionista -->
+  <section id="about">
+    <h2>ELE Ilusionista</h2>
+  </section>
 
-  <main id="dynamicContent">
+  <!-- Contenido dinámico de interacción y cartas -->
+  <div id="dynamicContent">
     <div id="interactionContainer"></div>
     <button id="continueButton" class="continue-button highlight">Continuar</button>
     <div id="cardsContainer"></div>
-  </main>
+  </div>
 
-  <aside id="fixedButtons">
+  <!-- Botones fijos para Instagram, Donar y WhatsApp -->
+  <div id="fixedButtons">
     <a href="https://instagram.com/ele.ilusionista" target="_blank">
       <img src="assets/Insta.png" alt="Instagram" />
     </a>
@@ -25,19 +31,22 @@
     <a href="https://wa.me/56978168508" target="_blank">
       <img src="assets/whats.png" alt="WhatsApp" />
     </a>
-  </aside>
+  </div>
 
+  <!-- Ventana emergente con datos de transferencia -->
   <div id="donatePopup" class="popup">
     <div class="popup-content">
       <span class="close">&times;</span>
-      <p>Muchas gracias!!! Te dejo mis datos:</p>
-      <pre id="transferData"></pre>
+      <p style="color: black;">Muchas gracias!!! Te dejo mis datos:</p>
+      <pre id="transferData" style="color: black;"></pre>
       <button id="copyButton">Copiar Datos</button>
     </div>
   </div>
 
+  <!-- Mensaje final de agradecimiento oculto hasta el final -->
   <div id="thankYouMessage">¡Muchas gracias!</div>
 
-  <script src="script.js" defer></script>
+  <!-- Script principal con toda la lógica del truco -->
+  <script src="script.js"></script>
 </body>
 </html>
