@@ -79,8 +79,10 @@ function nextStep() {
       typewriter(textEl, mensajes[2], 30, () => elements.continue.classList.add("highlight"));
       break;
     case 3:
-      typewriter(textEl, mensajes[3], 30, () => elements.continue.classList.add("highlight"));
-      renderCards(cards2);
+      typewriter(textEl, mensajes[3], 30, () => {
+        renderCards(cards2);
+        elements.continue.classList.add("highlight");
+      });
       break;
     case 4:
       typewriter(textEl, mensajes[4], 30, () => elements.continue.classList.add("highlight"));
@@ -96,7 +98,7 @@ function nextStep() {
       }, 100);
       setTimeout(() => {
         elements.donate.classList.add("highlight");
-        elements.donate.querySelector("img").classList.add("magic-particles");
+        elements.donate.querySelector("img").classList.add("pulse");
       }, 1500);
       elements.continue.style.display = "none";
       break;
@@ -107,8 +109,16 @@ function nextStep() {
 
 function bindEvents() {
   elements.continue.addEventListener("click", nextStep);
-  elements.donate.addEventListener("click", () => elements.popup.style.display = "flex");
-  elements.close.addEventListener("click", () => elements.popup.style.display = "none");
+
+  elements.donate.addEventListener("click", () => {
+    elements.popup.style.display = "flex";
+    elements.donate.querySelector("img").classList.remove("pulse");
+  });
+
+  elements.close.addEventListener("click", () => {
+    elements.popup.style.display = "none";
+  });
+
   elements.copy.addEventListener("click", () => {
     navigator.clipboard.writeText(elements.transfer.textContent)
       .then(() => alert("Datos copiados al portapapeles!"))
