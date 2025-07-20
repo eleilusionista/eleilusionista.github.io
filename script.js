@@ -97,7 +97,7 @@ function nextStep() {
         elements.thankYou.style.opacity = "1";
       }, 100);
       setTimeout(() => {
-        elements.donate.classList.add("highlight");
+        ;
         elements.donate.querySelector("img").classList.add("pulse");
       }, 1500);
       elements.continue.style.display = "none";
