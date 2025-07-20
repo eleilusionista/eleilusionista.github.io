@@ -21,7 +21,7 @@ const mensajes = [
   "Piensa en una de estas cartas, y nómbrala mentalmente...",
   "Nombra nuevamente esa carta en tu mente 3 veces. Luego aprieta continuar.",
   "Creo que ya sé cuál pensaste, la sacaré del set.",
-  "¿Sorprendido? ... para eso estoy acá. Si te gusta mi trabajo y quieres apoyarme, más abajo encontrarás mis datos de transferencia, así como también mi Instagram y mi WhatsApp.",
+  "¿Sorprendido? ... para eso estoy acá. Si te gusta mi trabajo puedes apotmyarme en la cuenta que aparece en el botón donar",
   "¡Muchas gracias!"
 ];
 
