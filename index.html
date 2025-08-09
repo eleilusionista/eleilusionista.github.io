@@ -1,52 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ELE, Ilusionista</title>
-  <!-- Hoja de estilos principal -->
+  <meta name="description" content="Mini truco interactivo de cartas + datos de donación" />
+  <link rel="preload" as="image" href="assets/fondo.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Sección de presentación del ilusionista -->
-  <section id="about">
-    <h2>ELE Ilusionista</h2>
+  <!-- Presentación -->
+  <section id="about" aria-labelledby="title">
+    <h2 id="title">ELE Ilusionista</h2>
   </section>
 
-  <!-- Contenido dinámico de interacción y cartas -->
+  <!-- Contenido principal -->
   <div id="dynamicContent">
-    <div id="interactionContainer"></div>
-    <button id="continueButton" class="continue-button highlight">Continuar</button>
-    <div id="cardsContainer"></div>
+    <div id="interactionContainer" role="region" aria-live="polite" aria-atomic="true">
+      <div class="typewriter-text"></div>
+    </div>
+    <button id="continueButton" class="continue-button highlight" type="button">Continuar</button>
+    <div id="cardsContainer" aria-label="Cartas"></div>
   </div>
 
-  <!-- Botones fijos para Instagram, Donar y WhatsApp -->
+  <!-- Botones fijos -->
   <div id="fixedButtons">
-    <a href="https://instagram.com/ele.ilusionista" target="_blank">
+    <a href="https://instagram.com/ele.ilusionista" target="_blank" rel="noopener" aria-label="Instagram de ELE Ilusionista">
       <img src="assets/Insta.png" alt="Instagram" />
     </a>
-    <a id="donarButton" href="#">
+    <a id="donarButton" href="#" aria-label="Abrir datos para donar">
       <img src="assets/Dona.png" alt="Donar" />
     </a>
-    <a href="https://wa.me/56978168508" target="_blank">
+    <a href="https://wa.me/56978168508" target="_blank" rel="noopener" aria-label="WhatsApp de ELE Ilusionista">
       <img src="assets/whats.png" alt="WhatsApp" />
     </a>
   </div>
 
-  <!-- Ventana emergente con datos de transferencia -->
-  <div id="donatePopup" class="popup">
+  <!-- Popup de donación -->
+  <div id="donatePopup" class="popup" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="popupTitle">
     <div class="popup-content">
-      <span class="close">&times;</span>
-      <p>Muchas gracias!!! Te dejo mis datos:</p>
-      <pre id="transferData"></pre>
-      <button id="copyButton">Copiar Datos</button>
+      <div class="popup-header">
+        <div id="popupTitle" class="popup-title">¡Muchas gracias!</div>
+        <button class="close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <p>Te dejo mis datos de transferencia:</p>
+      <pre id="transferData" class="transfer"></pre>
+      <button id="copyButton" class="copy-btn" type="button">Copiar datos</button>
     </div>
   </div>
 
-  <!-- Mensaje final de agradecimiento oculto hasta el final -->
-  <div id="thankYouMessage">¡Muchas gracias!</div>
+  <!-- Mensaje final -->
+  <div id="thankYouMessage" aria-hidden="true">
+    <div class="box">¡Muchas gracias!</div>
+  </div>
 
-  <!-- Script principal con toda la lógica del truco -->
-  <script src="script.js"></script>
+  <script defer src="script.js"></script>
 </body>
 </html>
