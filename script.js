@@ -7,8 +7,8 @@
     "assets/3x/jd.png", "assets/3x/ks.png", "assets/3x/qh.png"
   ];
   const cards2 = [
-    "assets/3x/js.png", "assets/3x/kd.png", "assets/3x/qt.png",
-    "assets/3x/jh.png", "assets/3x/qd.png"
+  "assets/3x/qd.png", "assets/3x/js.png", "assets/3x/kd.png", "assets/3x/qt.png",
+    "assets/3x/jh.png"
   ];
 
   const els = {
